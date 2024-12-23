@@ -1,0 +1,16 @@
+<div class="todo-list" *ngIf="selectedUser">
+  <h2>{{ selectedUser.name }}'s TODOs</h2>
+
+  <input [(ngModel)]="newTodo" placeholder="Add new TODO" />
+  <button (click)="addTodo()">Add TODO</button>
+
+  <ul>
+    <li *ngFor="let todo of selectedUser.todos; let i = index">
+      <div *ngIf="editingIndex !== i">{{ todo.description }}</div>
+      <input *ngIf="editingIndex === i" [(ngModel)]="editingTodo" placeholder="Edit TODO" />
+      <button *ngIf="editingIndex !== i" (click)="editTodo(i, todo)">Edit</button>
+      <button *ngIf="editingIndex === i" (click)="saveTodo()">Save</button>
+      <button (click)="deleteTodo(todo)">Delete</button>
+    </li>
+  </ul>
+</div>

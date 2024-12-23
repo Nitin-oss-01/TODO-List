@@ -1,0 +1,18 @@
+<div class="user-list">
+  <h2>Users</h2>
+
+  <input [(ngModel)]="newUserName" placeholder="Add new user">
+  <button (click)="addUser()">Add User</button>
+
+  <ul>
+    <li *ngFor="let user of users">
+      <span *ngIf="selectedUser?.id !== user.id">{{ user.name }}</span>
+      <input *ngIf="selectedUser?.id === user.id" [(ngModel)]="editUserName" placeholder="Edit user name" />
+      <button *ngIf="selectedUser?.id !== user.id" (click)="selectUser(user)">Select</button>
+      <button *ngIf="selectedUser?.id === user.id" (click)="updateUser(user.id)">Update</button>
+      <button (click)="deleteUser(user)">Delete</button>
+    </li>
+  </ul>
+</div>
+
+<app-todo-list [selectedUser]="selectedUser"></app-todo-list>
